@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:arabtesting2dgame/util/Keys.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'HomeController.dart';
+import 'package:animator/animator.dart';
 import 'WelcomeController.dart';
 
 class SplashController extends StatefulWidget {
@@ -37,10 +39,18 @@ class _SplashController extends State<SplashController> {
       backgroundColor: Colors.white,
         body: Container(
       child: Center(
-        child: Text(
-          "Image Puzzel Games!",
-          style: TextStyle(fontSize: 24, color: Colors.black),
+        child: Animator(
+          tween: Tween<double>(begin: 0,end: 2 * pi) ,
+          duration: Duration(seconds: 3),
+          repeats: 0,
+          curve: Curves.elasticInOut,
+          builder: (anim)=> Transform.rotate(angle: anim.value,
+          child: Text(
+            "Image Puzzel Games!",
+            style: TextStyle(fontSize: 24, color: Colors.black),
+          ),),
         ),
+
       ),
     ));
   }
